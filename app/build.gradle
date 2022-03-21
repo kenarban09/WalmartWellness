@@ -1,0 +1,108 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
+    id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdkVersion versions.android.compile
+
+    defaultConfig {
+        applicationId "com.krodriguez.walmartwellness"
+        minSdkVersion versions.android.minSdk
+        targetSdkVersion versions.android.targetSdk
+        versionCode versions.project.code
+        versionName versions.project.name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "API_BASE_URL", "\"https://gist.githubusercontent.com/peymano-wmt/32dcb892b06648910ddd40406e37fdab/raw/db25946fd77c5873b0303b858e861ce724e0dcd0/\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Kotlin and Coroutines
+    implementation deps.jetbrains.kotlinStdlib
+    implementation deps.jetbrains.kotlinCoroutinesCore
+    implementation deps.jetbrains.kotlinCoroutinesAndroid
+
+    // Android X
+    implementation deps.androidx.appCompat
+    implementation deps.androidx.cardView
+    implementation deps.androidx.constraintLayout
+    implementation deps.androidx.constraintLayoutSolver
+    implementation deps.androidx.fragmentKtx
+    implementation deps.androidx.lifecycleLiveData
+    implementation deps.androidx.lifecycleViewModel
+    implementation deps.androidx.navigationFragment
+    implementation deps.androidx.recyclerView
+    implementation deps.androidx.swipeRefreshLayout
+
+    // Google
+    implementation deps.google.material
+
+    // Square
+    implementation deps.square.retrofit
+    implementation deps.square.moshiConverter
+    implementation deps.square.okhttpLogging
+
+    // Dagger Hilt
+    implementation deps.google.daggerHiltAndroid
+    implementation deps.androidx.daggerHiltViewModel
+
+    // Dagger Hilt Compiler
+    kapt deps.google.daggerHiltCompiler
+    kapt deps.androidx.daggerHiltCompiler
+
+    // Coroutines tests
+    testImplementation deps.test.androidx.coreTesting
+    testImplementation deps.test.jetbrains.kotlinCoroutines
+
+    // Testing-only dependencies
+    debugImplementation deps.test.androidx.fragmentTesting
+    debugImplementation deps.test.androidx.fragmentKtx
+    debugImplementation deps.test.androidx.testRules
+
+    // Unit and UI Test
+    testImplementation deps.test.junit
+    testImplementation deps.test.mockito
+    testImplementation deps.test.robolectric
+    testImplementation deps.test.androidx.testCore
+    testImplementation deps.test.androidx.testExtJUnit
+    testImplementation deps.test.androidx.espressoCore
+    testImplementation deps.test.androidx.espressoIntents
+    testImplementation deps.test.androidx.exthTruth
+
+    // UI and Instrumented tests
+    androidTestImplementation deps.test.androidx.espressoCore
+    androidTestImplementation deps.test.androidx.coreTesting
+    androidTestImplementation deps.test.androidx.testExtJUnit
+    androidTestImplementation deps.instrumented.android.roomTesting
+    androidTestImplementation deps.instrumented.androidx.navigationTesting
+    androidTestImplementation deps.instrumented.androidx.testCore
+    androidTestImplementation deps.instrumented.androidx.testCoreKtx
+    androidTestImplementation deps.instrumented.androidx.testExtJUnitKtx
+    androidTestImplementation deps.instrumented.androidx.testRunner
+}

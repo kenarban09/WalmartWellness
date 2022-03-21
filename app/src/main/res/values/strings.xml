@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Walmart Wellness Challenge</string>
+    <string name="menu_list">Countries\' List</string>
+    <string name="empty_items">No data available!</string>
+</resources>
